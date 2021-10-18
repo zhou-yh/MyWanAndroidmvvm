@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.zyh.module_login.viewmodel.RegisterViewModel" />
+    </data>
+
+    <com.zyh.lib_base.widget.SrcScrollFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:maskLayerColor="#80000000"
+        app:scrollOrientation="vertical"
+        app:src="@drawable/login_bg">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel.onBackClick}"
+                android:padding="@dimen/dp_10"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_arrow_back_white_24dp"/>
+
+            <TextView
+                android:id="@+id/tvLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="注册"
+                android:textSize="40sp"
+                android:textColor="#ffffff"
+                android:layout_marginTop="100dp"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tl_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_40"
+                android:layout_marginEnd="@dimen/dp_40"
+                android:layout_marginTop="60dp"
+                android:textColorHint="@color/defaultTextColor"
+                app:hintTextColor="@color/defaultTextColor"
+                app:layout_constraintTop_toBottomOf="@+id/tvLogin">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/defaultTextColor"
+                    android:hint="账号"
+                    android:text="@{viewModel.account}"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/defaultTextColor"
+                    android:textColorHint="@color/defaultTextColor"
+                    android:theme="@style/TextInputWhiteStyle"
+                    binding:textChanged="@{viewModel.onAccountChangeCommand}"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tl_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_40"
+                android:layout_marginEnd="@dimen/dp_40"
+                android:layout_marginTop="20dp"
+                android:textColorHint="@color/defaultTextColor"
+                app:hintTextColor="@color/defaultTextColor"
+                app:passwordToggleTint="@color/defaultTextColor"
+                app:passwordToggleEnabled="true"
+                app:layout_constraintTop_toBottomOf="@+id/tl_account"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/defaultTextColor"
+                    android:hint="密码"
+                    android:text="@{viewModel.password}"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/defaultTextColor"
+                    android:textColorHint="@color/defaultTextColor"
+                    android:theme="@style/TextInputWhiteStyle"
+                    binding:textChanged="@{viewModel.onPasswordChangeCommand}"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tl_repassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_40"
+                android:layout_marginEnd="@dimen/dp_40"
+                android:layout_marginTop="20dp"
+                android:textColorHint="@color/defaultTextColor"
+                app:hintTextColor="@color/defaultTextColor"
+                app:passwordToggleTint="@color/defaultTextColor"
+                app:layout_constraintTop_toBottomOf="@+id/tl_password">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_repassword"
+                    style="@style/TextInputWhiteStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/defaultTextColor"
+                    android:hint="确认密码"
+                    android:text="@{viewModel.repassword}"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/defaultTextColor"
+                    android:textColorHint="@color/defaultTextColor"
+                    binding:textChanged="@{viewModel.onRepasswordChangeCommand}"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_register"
+                style="@style/TextInputWhiteStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:background="@drawable/gray_btn_corner_10dp"
+                android:text="注册"
+                android:textColor="@color/defaultTextColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tl_repassword"
+                binding:onClickCommand="@{viewModel.onRegisterClickCommand}"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:padding="@dimen/dp_10"
+                android:text="有账号了？前往登录"
+                android:textColor="#ffffff"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_register"
+                binding:onClickCommand="@{viewModel.onBackToLoginCommand}" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </com.zyh.lib_base.widget.SrcScrollFrameLayout>
+
+
+</layout>

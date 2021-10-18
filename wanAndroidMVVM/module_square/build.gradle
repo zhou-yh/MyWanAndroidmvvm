@@ -1,0 +1,19 @@
+apply from:'../module.build.gradle'
+
+android {
+
+    defaultConfig {
+       if (isBuildModule.toBoolean()){
+           //如果是独立模块
+           applicationId "com.zyh.module_square"
+       }
+        //统一资源前缀，规范资源引用
+        resourcePrefix "square_"
+    }
+
+
+}
+
+dependencies {
+    api project(':lib_base')
+}

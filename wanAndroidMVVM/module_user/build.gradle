@@ -1,0 +1,20 @@
+apply from:'../module.build.gradle'
+
+android {
+
+    defaultConfig{
+        //如果是独立模块
+        if (isBuildModule.toBoolean()) {
+            applicationId "com.zyh.module_user"
+        }
+
+        //统一资源前缀，规范资源引用
+        resourcePrefix "user_"
+    }
+
+}
+
+dependencies {
+
+    api project(':lib_base')
+}

@@ -1,0 +1,23 @@
+apply from:'../module.build.gradle'
+
+android {
+
+    defaultConfig{
+        //如果是独立模块
+        if (isBuildModule.toBoolean()) {
+            applicationId "com.zyh.module_main"
+        }
+
+        //统一资源前缀，规范资源引用
+        resourcePrefix "main_"
+    }
+
+
+}
+
+dependencies {
+
+    //依赖主件
+    api project(':lib_base')
+//    kapt rootProject.ext.dependencies["arouter_compiler"]
+}

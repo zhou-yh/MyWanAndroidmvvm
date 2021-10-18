@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.zyh.module_user.viewmodel.UserSettingVm" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_follow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/color_default_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <TextView
+                android:id="@+id/tv_follow_sys"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_weight="1"
+                android:padding="@dimen/dp_10"
+                android:text="跟随系统夜间模式"
+                android:textColor="@color/black" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sc_sys"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:checked="false"
+                android:theme="@style/SwitchStyleClickable"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_follow_sys"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_follow_sys"
+                binding:onSwitchCheckedCommand="@{viewModel.switchSysModelCheckCommand}"
+                />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_night_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_default_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_follow"
+            binding:isVisible="@{!viewModel.followSysUiModelState}"
+            >
+
+            <TextView
+                android:id="@+id/tv_night_mode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_weight="1"
+                android:padding="@dimen/dp_10"
+                android:text="夜间模式"
+                android:textColor="@color/black" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sc_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:checked="false"
+                android:theme="@style/SwitchStyleClickable"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_night_mode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_night_mode"
+                binding:onSwitchCheckedCommand="@{viewModel.switchUserModelCheckCommand}"
+                />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/color_default_bg"
+            app:layout_constraintTop_toBottomOf="@+id/ll_night_mode">
+
+            <TextView
+                android:id="@+id/tv_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_10"
+                android:text="阅读历史"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/cl_history"
+                app:layout_constraintTop_toTopOf="@id/cl_history" />
+
+            <TextView
+                android:id="@+id/tv_hint_history"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_10"
+                android:text="便于查找已登录状态下阅读过的文章，为本地操作更换手机或清除应用数据后已添加的数据将丢失"
+                android:textSize="@dimen/dp_12"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/sc_history"
+                app:layout_constraintStart_toStartOf="@id/tv_history"
+                app:layout_constraintTop_toBottomOf="@id/tv_history" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sc_history"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:theme="@style/SwitchStyleClickable"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_hint_history"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/btn_clear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/color_default_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_history"
+            binding:onClickCommand="@{viewModel.onCleanCacheClick}">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_weight="1"
+                android:padding="@dimen/dp_10"
+                android:text="清理缓存"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_cache"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:gravity="center"
+                android:text="@{viewModel.cacheSize}"
+                app:drawableEndCompat="@drawable/ic_navigate_next_black_24dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/btn_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/color_default_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_clear"
+            binding:onClickCommand="@{viewModel.onAboutUsClickCommand}">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_weight="1"
+                android:padding="@dimen/dp_10"
+                android:text="关于作者"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:gravity="center"
+                app:drawableEndCompat="@drawable/ic_navigate_next_black_24dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/btn_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/color_default_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_author">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_weight="1"
+                android:padding="@dimen/dp_10"
+                android:text="意见反馈"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:gravity="center"
+                app:drawableEndCompat="@drawable/ic_navigate_next_black_24dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/btn_check_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/color_default_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_feedback">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_weight="1"
+                android:padding="@dimen/dp_10"
+                android:text="检查更新"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:gravity="center"
+                app:drawableEndCompat="@drawable/ic_navigate_next_black_24dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/btn_login_out"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/color_default_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_check_update"
+            binding:isVisible="@{viewModel.logoutVisible}"
+            binding:onClickCommand="@{viewModel.logoutClickCommand}"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_weight="1"
+                android:padding="@dimen/dp_10"
+                android:text="退出登录"
+                android:textColor="@color/black"
+
+                />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
