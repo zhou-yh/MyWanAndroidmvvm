@@ -52,7 +52,7 @@ class UserFragment : BaseFragment<UserFragmentUserBinding, UserViewModel>() {
 
         GlobalScope.launch {
             delay(1000L)
-            println("hello coroutines")
+            println("hello this is coroutines test")
         }
 
 
